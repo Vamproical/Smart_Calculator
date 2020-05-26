@@ -1,0 +1,16 @@
+# Project exclude paths
+/.gradle/
+/Problems/Find a word with a given length/out/
+/Problems/Find a word with a given length/out/production/classes/
+/Problems/In the middle of a word/out/
+/Problems/In the middle of a word/out/production/classes/
+/Problems/Number parsing/out/
+/Problems/Number parsing/out/production/classes/
+/Problems/Remove comments/out/
+/Problems/Remove comments/out/production/classes/
+/Problems/Remove extra spaces/out/
+/Problems/Remove extra spaces/out/production/classes/
+/Smart Calculator/task/build/
+/Smart Calculator/task/out/
+/Smart Calculator/task/out/production/classes/
+/Smart Calculator/task/out/test/classes/

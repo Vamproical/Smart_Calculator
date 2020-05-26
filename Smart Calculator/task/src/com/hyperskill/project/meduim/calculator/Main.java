@@ -1,37 +1,58 @@
 package com.hyperskill.project.meduim.calculator;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
-
+    public static String checkOp(String p, String op){
+        if (op.equals(p) && p.equals("-")) return "+";
+        else if (op.equals("+") && p.equals("-")) return "-";
+        else return "+";
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String operation = "+";
+        Pattern pattern = Pattern.compile("[+-]?\\d+");
+        Matcher matcher;
+        label:
         while (true) {
             String nextExpression = scanner.nextLine();
-            String[] arrayNextExpression = nextExpression.split(" ");
-            if (nextExpression.equals("/exit")) {
-                System.out.println("Bye!");
-                break;
-            }
-            else if (nextExpression.equals("/help")) {
-                System.out.println("The program calculates the sum of numbers");
-            }
-            else if (arrayNextExpression.length == 0 || nextExpression.isEmpty()) {
-                continue;
-            }
-            else if (arrayNextExpression.length == 1) {
-                System.out.println(arrayNextExpression[0]);
-            }
-            else {
-                int[] arrayNumbers = new int[arrayNextExpression.length];
-                int result = 0;
-                for (int i = 0; i < arrayNumbers.length; i++) {
-                    arrayNumbers[i] = Integer.parseInt(arrayNextExpression[i]);
-                    result += arrayNumbers[i];
-                }
-                System.out.println(result);
-            }
+            int result = 0;
+            switch (nextExpression) {
+                case "/exit":
+                    System.out.println("Bye!");
+                    break label;
+                case "/help":
+                    System.out.println("The program calculates the sum of numbers");
+                    break;
+                case "":
+                    continue;
+                default:
+                    for (String str : nextExpression.split(" +")) {
+                        matcher = pattern.matcher(str);
+                        if (matcher.matches()) {
+                            if (operation.equals("-")) {
+                                result -= Integer.parseInt(str);
+                                operation = "+";
+                            } else if (operation.equals("+")) {
+                                result += Integer.parseInt(str);
+                            }
 
+                        } else {
+                            char[] charStr = str.toCharArray();
+                            if (charStr.length > 1) {
+                                for (char c : charStr) {
+                                    operation = checkOp(Character.toString(c), operation);
+                                }
+                            } else {
+                                operation = checkOp(str, operation);
+                            }
+                        }
+                    }
+                    System.out.println(result);
+                    break;
+            }
         }
     }
 }
