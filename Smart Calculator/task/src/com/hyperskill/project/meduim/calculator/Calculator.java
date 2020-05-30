@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private final Map<String, Integer> variables = new HashMap<>();
+    private final Map<String, BigInteger> variables = new HashMap<>();
     private final Deque<String> stackForPostfix = new ArrayDeque<>();
     private final Deque<String> stackForCalculate = new ArrayDeque<>();
 
@@ -41,7 +41,7 @@ public class Calculator {
                 System.out.println("Unknown variable");
             }
         } else {
-            variables.put(arrayString[0], Integer.parseInt(arrayString[1]));
+            variables.put(arrayString[0], new BigInteger(arrayString[1]));
         }
     }
 
